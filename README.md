@@ -7,7 +7,7 @@
 ## Использование:
 Подключите в любом модуле
 ```javascript
-import StateManager from "statemanager";
+import StateManager from "lite-react-statemanager";
 ```
 
 ### Далее для классов React происходит установка глобальных стейтов:
