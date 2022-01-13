@@ -1,6 +1,6 @@
 {
   "name": "lite-react-statemanager",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Простой State менеджер для React'а",
   "main": "index.js",
   "scripts": {

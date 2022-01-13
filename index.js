@@ -1,7 +1,9 @@
 class States {
 
-    StatesValues = {};
-    StatesSubscribe = {};
+    constructor() {
+        this.StatesValues = {};
+        this.StatesSubscribe = {};
+    }
 
     get state() {
         return this.StatesValues;
