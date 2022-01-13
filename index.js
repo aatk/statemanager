@@ -11,12 +11,15 @@ class States {
 
     setState(stateObject, bindThis = null) {
         if (bindThis !== null) {
-            bindThis.setState( stateObject );
+            bindThis.setState(stateObject);
+        }
+
+        for (let stateName in stateObject) {
+            this.StatesValues[stateName] = stateObject[stateName];
         }
 
         for (let stateName in stateObject) {
             let value = stateObject[stateName];
-            this.StatesValues[stateName] = value;
 
             let listSubscribes = this.StatesSubscribe[stateName];
             for (let key in listSubscribes) {
@@ -24,11 +27,10 @@ class States {
 
                 let object = {};
                 object[stateName] = value;
-                //callback( object );
                 if (typeof callback === "function") {
-                    callback( object );
+                    callback(object);
                 } else {
-                    callback.setState( object );
+                    callback.setState(object);
                 }
             }
         }
@@ -39,7 +41,9 @@ class States {
         for (let stateName in subscribeObject) {
             let subscribes = subscribeObject[stateName];
 
-            if (this.StatesSubscribe[stateName] === undefined) { this.StatesSubscribe[stateName] = {} }
+            if (this.StatesSubscribe[stateName] === undefined) {
+                this.StatesSubscribe[stateName] = {}
+            }
             let allSubscribesName = Object.keys(this.StatesSubscribe[stateName]);
 
             for (let subscribeName in subscribes) {
