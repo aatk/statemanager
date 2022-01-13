@@ -4,7 +4,7 @@
 ## Установка:
 Установите пакет `npm i lite-react-statemanager`
 
-##Использование:
+## Использование:
 Подключите в любом модуле
 ```javascript
 import StateManager from "statemanager";
