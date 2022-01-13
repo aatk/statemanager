@@ -7,7 +7,7 @@ class States {
         return this.StatesValues;
     };
 
-    setState = (stateObject, bindThis = null) => {
+    setState(stateObject, bindThis = null) {
         if (bindThis !== null) {
             bindThis.setState( stateObject );
         }
@@ -33,7 +33,7 @@ class States {
     }
 
 
-    subscribeState = (subscribeObject) => {
+    subscribeState(subscribeObject) {
         for (let stateName in subscribeObject) {
             let subscribes = subscribeObject[stateName];
 
@@ -48,7 +48,7 @@ class States {
         }
     }
 
-    unsubscribeState = (subscribeObject) => {
+    unsubscribeState(subscribeObject) {
         for (let stateName in subscribeObject) {
             let subscribes = subscribeObject[stateName];
 
@@ -70,4 +70,5 @@ class States {
 
 
 let StateManager = new States();
+
 export default StateManager;
