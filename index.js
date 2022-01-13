@@ -9,6 +9,16 @@ class States {
         return this.StatesValues;
     };
 
+    _callbackRun(callback, stateName, value) {
+        let object = {};
+        object[stateName] = value;
+        if (typeof callback === "function") {
+            callback(object);
+        } else {
+            callback.setState(object);
+        }
+    }
+
     setState(stateObject, bindThis = null) {
         if (bindThis !== null) {
             bindThis.setState(stateObject);
@@ -25,13 +35,7 @@ class States {
             for (let key in listSubscribes) {
                 let callback = listSubscribes[key];
 
-                let object = {};
-                object[stateName] = value;
-                if (typeof callback === "function") {
-                    callback(object);
-                } else {
-                    callback.setState(object);
-                }
+                this._callbackRun(callback, stateName, value);
             }
         }
     }
@@ -49,6 +53,19 @@ class States {
             for (let subscribeName in subscribes) {
                 if (!allSubscribesName.includes(subscribeName)) {
                     this.StatesSubscribe[stateName] = {...this.StatesSubscribe[stateName], ...subscribes};
+                }
+            }
+        }
+
+        //Если при подписке уже есть какие-то значения, то отправим их обратно
+        for (let stateName in subscribeObject) {
+            let value = this.StatesValues[stateName];
+            if (value !== undefined) {
+
+                let subscribes = subscribeObject[stateName];
+                for (let subscribeName in subscribes) {
+                    let callback = subscribes[subscribeName];
+                    this._callbackRun(callback, stateName, value);
                 }
             }
         }
